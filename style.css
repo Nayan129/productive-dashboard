@@ -1,0 +1,415 @@
+@font-face {
+  font-family: light;
+  src: url(./assets/AeonikTRIAL-Light.otf);
+}
+@font-face {
+  font-family: normal;
+  src: url(./assets/AeonikTRIAL-Regular.otf);
+}
+@font-face {
+  font-family: bold;
+  src: url(./assets/AeonikTRIAL-Bold.otf);
+}
+@font-face {
+  font-family: best;
+  src: url(./assets/Candu.ttf);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+:root {
+  --pri: #fff;
+  --sec: #111;
+  --Tri: rgba(121, 0, 0, 0.646);
+  --Tri2: rgb(255, 255, 16);
+
+  --bg-color1: #1b262c;
+  --bg-color2: #0f4c75;
+  --bg-color3: #614735;
+  --bg-color4: #452829;
+}
+body {
+  color: var(--pri);
+  background-color: var(--bg-color1);
+  font-family: normal;
+}
+main {
+  /* position: relative; */
+  height: 100vh;
+  width: 100vw;
+  user-select: none;
+}
+section.allTasks {
+  background-color: var(--bg-color4);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 20px 15px;
+  overflow-x: hidden;
+  position: absolute;
+}
+.elem {
+  height: 260px;
+  min-width: 240px;
+  border: 2px solid white;
+  border-radius: 0.6rem;
+  overflow: hidden;
+  position: relative;
+  transition: all ease-in 0.2s;
+}
+.elem img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.6;
+  cursor: pointer;
+  transition: all ease-in 0.2s;
+}
+.elem img:hover {
+  opacity: 1;
+}
+.elem:active {
+  scale: 0.97;
+}
+.elem h2 {
+  position: absolute;
+  bottom: 0;
+  right: 10%;
+  font-family: bold;
+  color: var(--pri);
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+/* this is for section 2 where seperately all task visible  */
+.separateTasks {
+  height: 100%;
+  width: 100%;
+  display: none;
+  position: absolute;
+  background-color: var(--bg-color3);
+  padding: 20px;
+}
+.backBtn {
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+  border-radius: 10%;
+  position: absolute;
+  right: 5%;
+  top: 5%;
+  background-color: red;
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+}
+.backBtn:active {
+  scale: 0.95;
+}
+
+/* .......... todo fullpage styling .............. */
+.todoTasks {
+  height: 80%;
+  width: 100%;
+  /* background-color: var(--bg-color4); */
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 5px;
+}
+
+.inputTasks {
+  height: 100%;
+  width: 33%;
+  background-color: rgba(75, 44, 44, 0.416);
+  border-radius: 5px;
+}
+.inputTasks form {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 1.2rem 0.5rem;
+}
+.inputTasks form #taskInput {
+  padding: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  outline: none;
+  font-family: normal;
+  border: none;
+}
+.inputTasks form #textarea {
+  padding: 5px;
+  height: 200px;
+  font-size: 15px;
+  font-weight: 500;
+  outline: none;
+  border: none;
+  font-family: normal;
+}
+.inputTasks form button {
+  padding: 10px;
+  font-weight: 600;
+  font-size: 18px;
+  font-family: bold;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  cursor: pointer;
+  background-color: rgb(233, 132, 18);
+}
+.inputTasks form button:active {
+  scale: 0.97;
+}
+.checkbox {
+  width: 100%;
+  display: flex;
+  gap: 0.8rem;
+  padding-left: 3px;
+}
+.checkbox #check {
+  scale: 1.5;
+}
+.checkbox label {
+  font-size: 17px;
+  font-weight: 600;
+  font-family: bold;
+}
+.allInputTasks {
+  width: 65%;
+  height: 100%;
+  background-color: rgba(75, 44, 44, 0.416);
+  border-radius: 5px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  overflow: auto;
+}
+.displayInputTasks {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  background-color: #381a05;
+  border-radius: 10px;
+}
+.displayInputTasks h3 {
+  font-weight: 600;
+  letter-spacing: 1px;
+  position: relative;
+}
+.displayInputTasks span {
+  background: #e63946; /* red */
+  color: #fff;
+  font-size: 7px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-weight: 600;
+  position: absolute;
+  margin-left: 5px;
+}
+.allInputTasks button {
+  height: fit-content;
+  padding: 11px;
+  background-color: rgb(26, 134, 26);
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+  font-family: bold;
+  font-size: 14px;
+  color: var(--pri);
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+.allInputTasks button:active {
+  scale: 0.97;
+}
+/* .............. daily panner css ...........*/
+
+.daily-fullTasks h1 {
+  font-size: 38px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.day-planner {
+  background-color: var(--bg-color4);
+  border-radius: 14px;
+  padding: 32px;
+  margin-top: 36px;
+  height: 80%;
+  width: 100%;
+  color: #111;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  overflow: auto;
+}
+
+.day-planner-time {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 49%;
+  margin-bottom: 14px;
+}
+
+.day-planner-time p {
+  font-size: 12px;
+  font-weight: 800;
+  position: absolute;
+  top: 6px;
+  left: 10px;
+  color: rgb(176, 97, 23);
+  pointer-events: none;
+}
+
+.day-planner-time input {
+  width: 100%;
+  padding: 18px 16px;
+  padding-top: 26px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  background: #cfcbcb;
+}
+
+/* ................ motivational page .................. */
+.motivation-fullTasks {
+  /* display: block; */
+  position: relative;
+}
+.motivation-container {
+  height: 60%;
+  width: 40%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 30px;
+}
+.motivation-container::after {
+  content: "";
+  height: 25rem;
+  min-width: 30rem;
+  position: absolute;
+  top: 3%;
+  left: 4%;
+  box-shadow: 0 0 20px rgb(255, 255, 255);
+  border-radius: 30px;
+  scale: 1.15;
+  z-index: 9;
+}
+.motivation-wrapper {
+  z-index: 10;
+  position: absolute;
+  min-height: 420px;
+  min-width: 520px;
+  background-color: rgba(0, 254, 229, 0.808);
+  border-radius: 30px;
+  padding: 15px;
+}
+.motivation-wrapper .motivation-1 {
+  width: fit-content;
+  background-color: #381a05;
+  padding: 20px;
+  border-radius: 18px;
+  margin-top: 20px;
+}
+.motivation-1 h2 {
+  font-size: 35px;
+  font-weight: 600;
+  user-select: none;
+  letter-spacing: 2px;
+  font-family: bold;
+}
+.motivation-2 {
+  padding: 15px;
+  margin-top: 20px;
+  line-height: 1.2;
+}
+/* Quote styling */
+.motivation-2 h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #381a05;
+  letter-spacing: 1px;
+  line-height: 1.5;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.motivation-3 {
+  width: fit-content;
+}
+.motivation-3 h2 {
+  font-size: 20px;
+  font-weight: 500;
+  color: #f9f9f9;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  letter-spacing: 1px;
+  margin-top: 15px;
+  background-color: #1b262c;
+  padding: 12px;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+}
+
+.motivation-wrapper img {
+  position: absolute;
+  top: 6%;
+  right: 5%;
+  opacity: 0.7;
+}
+
+/* ................. Pomodoro Timer ................... */
+.timer-fullTasks {
+  /* display: block; */
+  position: relative;
+}
+.timer-fullTasks > h1 {
+  font-size: 40px;
+  font-weight: 700;
+  user-select: none;
+  letter-spacing: 2px;
+}
+.pomo-timer {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.pomo-timer h1 {
+  font-size: 100px;
+}
+.pomo-timer button {
+  background-color: var(--Tri2);
+  padding: 15px 40px;
+  font-size: 20px;
+  font-weight: 600;
+  border-radius: 5px;
+  margin: 10px;
+  border: none;
+  box-shadow: 3px 3px 0 black;
+}
+.pomo-timer button:active {
+  box-shadow: 0 0 0 black;
+  scale: 0.97;
+}
