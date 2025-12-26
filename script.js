@@ -79,7 +79,7 @@ function todoList() {
     renderTask();
   });
 }
-// todoList();
+todoList();
 
 // ............. Daily planner Logic .................
 function dailyPlanner() {
@@ -118,9 +118,9 @@ function dailyPlanner() {
     });
   });
 }
-// dailyPlanner();
+dailyPlanner();
 
-// ............. Motivation Quotes logic ................
+// ............. Motivation Quotes logic ..................
 
 function motivationalQuote() {
   let motivation2 = document.querySelector(".motivation-2");
@@ -137,47 +137,95 @@ function motivationalQuote() {
   }
   fetchQoutes();
 }
-// motivationalQuote();
+motivationalQuote();
 
-// ............. Pomodoro Timer Logic ..................
-let timer = document.querySelector(".pomo-timer h1");
-let startBtn = document.querySelector(".pomo-timer .start-timer");
-let pauseBtn = document.querySelector(".pomo-timer .pause-timer");
-let resetBtn = document.querySelector(".pomo-timer .reset-timer");
+// ............. Pomodoro Timer Logic .....................
 
-let timerInterval = null;
-let totalseconds = 25 * 60;
+function PomodoroTimer() {
+  let timer = document.querySelector(".pomo-timer h1");
+  let startBtn = document.querySelector(".pomo-timer .start-timer");
+  let pauseBtn = document.querySelector(".pomo-timer .pause-timer");
+  let resetBtn = document.querySelector(".pomo-timer .reset-timer");
+  let displaySession = document.querySelector(".timer-fullTasks .session");
 
-function updateTimer() {
-  let minutes = Math.floor(totalseconds / 60);
-  let seconds = totalseconds % 60;
-  timer.innerHTML = `${String(minutes).padStart(2, "0")}:${String(
-    seconds
-  ).padStart(2, "0")}`;
-}
+  let timerInterval = null;
+  let totalseconds = 25 * 60;
 
-function startTimer() {
-  clearInterval(timerInterval);
-  timerInterval = setInterval(() => {
-    if (totalseconds <= 0) {
-      clearInterval(timerInterval);
-      timer = timer.innerHTML;
+  startBtn.disabled = false;
+  let isWorkSession = true;
+
+  function updateTimer() {
+    let minutes = Math.floor(totalseconds / 60);
+    let seconds = totalseconds % 60;
+    timer.innerHTML = `${String(minutes).padStart(2, "0")}:${String(
+      seconds
+    ).padStart(2, "0")}`;
+  }
+
+  function startTimer() {
+    clearInterval(timerInterval);
+    startBtn.disabled = true;
+
+    if (isWorkSession) {
+      if (totalseconds === 0) totalseconds = 25 * 60;
+
+      displaySession.innerHTML = "Work Session";
+      displaySession.style.backgroundColor = "green";
+
+      timerInterval = setInterval(() => {
+        if (totalseconds > 0) {
+          totalseconds--;
+          updateTimer();
+        } else {
+          isWorkSession = false;
+          totalseconds = 0;
+          clearInterval(timerInterval);
+          timer.innerHTML = "05:00";
+          startBtn.disabled = false;
+          displaySession.innerHTML = "Break";
+          displaySession.style.backgroundColor = "blue";
+        }
+      }, 1000);
     } else {
-      totalseconds--;
-      updateTimer();
+      if (totalseconds === 0) totalseconds = 5 * 60;
+
+      displaySession.innerHTML = "Break";
+      displaySession.style.backgroundColor = "blue";
+
+      timerInterval = setInterval(() => {
+        if (totalseconds > 0) {
+          totalseconds--;
+          updateTimer();
+        } else {
+          isWorkSession = true;
+          totalseconds = 0;
+          clearInterval(timerInterval);
+          timer.innerHTML = "25:00";
+          startBtn.disabled = false;
+          displaySession.innerHTML = "Work Session";
+          displaySession.style.backgroundColor = "green";
+        }
+      }, 1000);
     }
-  }, 10);
-}
+  }
 
-function pauseTimer() {
-  clearInterval(timerInterval);
-}
-function resetTimer() {
-  clearInterval(timerInterval);
-  totalseconds = 25 * 60;
-  updateTimer();
-}
+  function pauseTimer() {
+    clearInterval(timerInterval);
+    startBtn.disabled = false;
+  }
 
-startBtn.addEventListener("click", startTimer);
-pauseBtn.addEventListener("click", pauseTimer);
-resetBtn.addEventListener("click", resetTimer);
+  function resetTimer() {
+    clearInterval(timerInterval);
+    displaySession.innerHTML = "Work Session";
+    displaySession.style.backgroundColor = "green";
+    isWorkSession = true;
+    startBtn.disabled = false;
+    totalseconds = 25 * 60;
+    updateTimer();
+  }
+
+  startBtn.addEventListener("click", startTimer);
+  pauseBtn.addEventListener("click", pauseTimer);
+  resetBtn.addEventListener("click", resetTimer);
+}
+PomodoroTimer();

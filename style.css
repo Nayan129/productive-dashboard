@@ -50,14 +50,17 @@ section.allTasks {
   background-color: var(--bg-color4);
   height: 100%;
   width: 100%;
+  overflow-x: hidden;
+  position: absolute;
+}
+.allTasks .allFeatures {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 0.5rem;
   padding: 20px 15px;
-  overflow-x: hidden;
-  position: absolute;
 }
+
 .elem {
   height: 260px;
   min-width: 240px;
@@ -380,7 +383,6 @@ section.allTasks {
 
 /* ................. Pomodoro Timer ................... */
 .timer-fullTasks {
-  /* display: block; */
   position: relative;
 }
 .timer-fullTasks > h1 {
@@ -408,8 +410,28 @@ section.allTasks {
   margin: 10px;
   border: none;
   box-shadow: 3px 3px 0 black;
+  cursor: pointer;
+}
+.pomo-timer button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 .pomo-timer button:active {
   box-shadow: 0 0 0 black;
   scale: 0.97;
 }
+.timer-fullTasks .session {
+  position: absolute;
+  top: 17%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background: rgb(42, 178, 42);
+  color: var(--pri);
+  padding: 14px 20px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+/* ................... Daily Goals ..................... */
