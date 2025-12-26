@@ -11,7 +11,8 @@ This project is designed with a **clean UI, modular structure, and scalable mind
 - ✅ **To-Do List** – Add and manage tasks with descriptions and priority marking
 - 🗓️ **Daily Planner** – Plan your day hour-by-hour for better productivity
 - 💬 **Motivation Section** – Fetches random motivational quotes using a public REST API
-- ⏱️ **Pomodoro Timer** – 25-minute focus timer with start, pause, and reset controls
+- ⏱️ **Pomodoro Timer** – 25-minute focus timer with start, pause, and reset controls. Fully functional with start, pause, reset, proper MM:SS formatting, and edge-case handling
+
 - 🎯 **Daily Goals (Upcoming)** – Track and review daily goals
 
 ---
