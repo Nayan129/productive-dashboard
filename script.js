@@ -43,6 +43,8 @@ function landingPageData() {
 
     let ampm = hours >= 12 ? "PM" : "AM";
     hours = hours % 12 || 12;
+
+    hours = hours < 10 ? "0" + hours : hours;
     minutes = minutes < 10 ? "0" + minutes : minutes;
     seconds = seconds < 10 ? "0" + seconds : seconds;
 
@@ -106,7 +108,7 @@ function openFeatures() {
     });
   });
 }
-// openFeatures();
+openFeatures();
 // ............. todo list logic .....................
 function todoList() {
   var currentTask = [];
@@ -167,7 +169,7 @@ function todoList() {
     renderTask();
   });
 }
-// todoList();
+todoList();
 
 // ............. Daily planner Logic .................
 function dailyPlanner() {
@@ -206,7 +208,7 @@ function dailyPlanner() {
     });
   });
 }
-// dailyPlanner();
+dailyPlanner();
 
 // ............. Motivation Quotes logic ..................
 
@@ -225,7 +227,7 @@ function motivationalQuote() {
   }
   fetchQoutes();
 }
-// motivationalQuote();
+motivationalQuote();
 
 // ............. Pomodoro Timer Logic .....................
 
@@ -318,4 +320,4 @@ function PomodoroTimer() {
   pauseBtn.addEventListener("click", pauseTimer);
   resetBtn.addEventListener("click", resetTimer);
 }
-// PomodoroTimer();
+PomodoroTimer();
