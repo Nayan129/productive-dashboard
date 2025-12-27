@@ -46,6 +46,7 @@ main {
   width: 100vw;
   user-select: none;
 }
+/* ............. first section styling ............. */
 section.allTasks {
   background-color: var(--bg-color4);
   height: 100%;
@@ -60,7 +61,6 @@ section.allTasks {
   gap: 0.5rem;
   padding: 20px 15px;
 }
-
 .elem {
   height: 260px;
   min-width: 240px;
@@ -93,6 +93,49 @@ section.allTasks {
   color: var(--pri);
   letter-spacing: 1px;
   white-space: nowrap;
+}
+
+header {
+  background-color: var(--bg-color3);
+  height: 45%;
+  width: 98%;
+  margin: 10px 10px 10px 10px;
+  border-radius: 15px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px;
+  background-image: url("https://images.unsplash.com/photo-1736102790530-7c08d19911d4?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  background-size: cover;
+  background-position: center;
+}
+
+.header-1 {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.header-1 h1 {
+  font-size: 80px;
+  font-family: bold;
+}
+.header-1 h4 {
+  font-size: 50px;
+  font-weight: 600;
+}
+.header-2 h2 {
+  font-size: 50px;
+  font-weight: 700;
+}
+.header-2 h4 {
+  font-size: 25px;
+  font-weight: 500;
+}
+.header-2 h3 {
+  font-size: 22px;
+  font-weight: 500px;
 }
 
 /* this is for section 2 where seperately all task visible  */

@@ -1,3 +1,35 @@
+// ................ Landing Page Logic ...................
+let header = document.querySelector("header");
+const API_KEY = CONFIG.WEATHER_API_KEY;
+async function fetchWeatherData() {
+  let response = await fetch(
+    `https://api.openweathermap.org/data/2.5/weather?q=Nagpur&units=metric&appid=${API_KEY}`
+  );
+  let data = await response.json();
+
+  let landingData = "";
+
+  landingData += `
+          <div class="header-1">
+            <h1>${new Date().toLocaleTimeString()}</h1>
+            <h4>${data.name}</h4>
+          </div>
+
+          <div class="header-2">
+            <h2>${Math.round(data.main.temp)} °C
+</h2>
+            <h4>${data.weather[0].description}</h4>
+            <h4></h4>
+            <h4>Humidity: ${data.main.humidity}%</h4>
+            <h4>${(data.wind.speed * 3.6).toFixed(1)} km/h</h4>
+          </div>`;
+
+  header.innerHTML = landingData;
+}
+
+fetchWeatherData();
+
+// ............ fullTasks Openfeature Logic ..............
 function openFeatures() {
   const allTasksSection = document.querySelector(".allTasks");
   let allTasks = document.querySelectorAll(".elem");
@@ -19,7 +51,7 @@ function openFeatures() {
   });
 }
 openFeatures();
-// ............. todo list logic .................
+// ............. todo list logic .....................
 function todoList() {
   var currentTask = [];
 
@@ -102,7 +134,7 @@ function dailyPlanner() {
 
   let fullDaySum = "";
   hours.forEach((elem, idx) => {
-    savedData = dayPlanData[idx] || "";
+    let savedData = dayPlanData[idx] || "";
     fullDaySum += `<div class="day-planner-time">
             <p>${6 + idx}:00 - ${7 + idx}:00</p>
             <input id = ${idx} type="text" placeholder="..." value = "${savedData}"/>
@@ -180,7 +212,8 @@ function PomodoroTimer() {
           isWorkSession = false;
           totalseconds = 0;
           clearInterval(timerInterval);
-          timer.innerHTML = "05:00";
+          totalseconds = 5 * 60;
+          updateTimer();
           startBtn.disabled = false;
           displaySession.innerHTML = "Break";
           displaySession.style.backgroundColor = "blue";
@@ -200,7 +233,8 @@ function PomodoroTimer() {
           isWorkSession = true;
           totalseconds = 0;
           clearInterval(timerInterval);
-          timer.innerHTML = "25:00";
+          totalseconds = 25 * 60;
+          updateTimer();
           startBtn.disabled = false;
           displaySession.innerHTML = "Work Session";
           displaySession.style.backgroundColor = "green";
