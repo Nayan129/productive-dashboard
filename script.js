@@ -1,33 +1,89 @@
 // ................ Landing Page Logic ...................
-let header = document.querySelector("header");
-const API_KEY = CONFIG.WEATHER_API_KEY;
-async function fetchWeatherData() {
-  let response = await fetch(
-    `https://api.openweathermap.org/data/2.5/weather?q=Nagpur&units=metric&appid=${API_KEY}`
-  );
-  let data = await response.json();
+function landingPageData() {
+  let header = document.querySelector("header");
 
-  let landingData = "";
+  const API_KEY = CONFIG.WEATHER_API_KEY;
 
-  landingData += `
-          <div class="header-1">
-            <h1>${new Date().toLocaleTimeString()}</h1>
-            <h4>${data.name}</h4>
-          </div>
+  function timeDate(data) {
+    let landingPageData = "";
+    const totalDaysOfWeek = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
 
-          <div class="header-2">
-            <h2>${Math.round(data.main.temp)} °C
+    let now = new Date();
+    let date = now.getDate();
+    let dayOfWeek = totalDaysOfWeek[now.getDay()];
+    let hours = now.getHours();
+    let minutes = now.getMinutes();
+    let seconds = now.getSeconds();
+    let month = months[now.getMonth()];
+    let year = now.getFullYear();
+
+    // it is for 24 to 12 hours conversion and minutes into 2 digit format logic
+
+    let ampm = hours >= 12 ? "PM" : "AM";
+    hours = hours % 12 || 12;
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    landingPageData += `
+        <div class="header-1">
+          <h2>${date} ${month}, ${year}</h2>
+          <h1>${dayOfWeek}, ${hours}:${minutes}:${seconds} ${ampm}</h1>
+          <h4>${data.name}</h4>
+        </div>
+
+        <div class="header-2">
+          <h2>${Math.round(data.main.temp)} °C
 </h2>
-            <h4>${data.weather[0].description}</h4>
-            <h4></h4>
-            <h4>Humidity: ${data.main.humidity}%</h4>
-            <h4>${(data.wind.speed * 3.6).toFixed(1)} km/h</h4>
-          </div>`;
+          <h4>${data.weather[0].description}</h4>
+          <h4>Humidity: ${data.main.humidity}%</h4>
+          <h4>${(data.wind.speed * 3.6).toFixed(1)} km/h</h4>
+        </div>`;
 
-  header.innerHTML = landingData;
+    header.innerHTML = landingPageData;
+  }
+
+  async function fetchWeatherData() {
+    try {
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=Nagpur&units=metric&appid=${API_KEY}`
+      );
+      let data = await response.json();
+
+      timeDate(data);
+      setInterval(() => {
+        timeDate(data);
+      }, 1000);
+    } catch (error) {
+      console.error("Weather API Error:", error);
+      header.innerHTML = "<h2>Unable to load weather data</h2>";
+    }
+  }
+
+  fetchWeatherData();
 }
-
-fetchWeatherData();
+landingPageData();
 
 // ............ fullTasks Openfeature Logic ..............
 function openFeatures() {
@@ -50,7 +106,7 @@ function openFeatures() {
     });
   });
 }
-openFeatures();
+// openFeatures();
 // ............. todo list logic .....................
 function todoList() {
   var currentTask = [];
@@ -111,7 +167,7 @@ function todoList() {
     renderTask();
   });
 }
-todoList();
+// todoList();
 
 // ............. Daily planner Logic .................
 function dailyPlanner() {
@@ -150,7 +206,7 @@ function dailyPlanner() {
     });
   });
 }
-dailyPlanner();
+// dailyPlanner();
 
 // ............. Motivation Quotes logic ..................
 
@@ -169,7 +225,7 @@ function motivationalQuote() {
   }
   fetchQoutes();
 }
-motivationalQuote();
+// motivationalQuote();
 
 // ............. Pomodoro Timer Logic .....................
 
@@ -262,4 +318,4 @@ function PomodoroTimer() {
   pauseBtn.addEventListener("click", pauseTimer);
   resetBtn.addEventListener("click", resetTimer);
 }
-PomodoroTimer();
+// PomodoroTimer();
