@@ -1,3 +1,4 @@
+
 @font-face {
   font-family: light;
   src: url(./assets/AeonikTRIAL-Light.otf);
@@ -17,6 +18,7 @@
 * {
   margin: 0;
   padding: 0;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 html,
@@ -29,6 +31,7 @@ body {
   --sec: #111;
   --Tri: rgba(121, 0, 0, 0.646);
   --Tri2: rgb(255, 255, 16);
+  --Tri3: rgb(250, 20, 20);
 
   --bg-color1: #1b262c;
   --bg-color2: #0f4c75;
@@ -41,46 +44,71 @@ body {
   font-family: normal;
 }
 main {
-  /* position: relative; */
   height: 100vh;
   width: 100vw;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 }
+
+nav {
+  background-color: rgba(0, 128, 128, 0.071);
+  padding: 12px;
+  margin: 0.6rem;
+  border-radius: 1.1rem;
+}
+
+nav h2 {
+  font-size: 30px;
+  font-weight: 800;
+  text-align: center;
+}
+
 /* ............. first section styling ............. */
 section.allTasks {
-  background-color: var(--bg-color4);
   height: 100%;
   width: 100%;
   overflow-x: hidden;
   position: absolute;
 }
 .allTasks .allFeatures {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
   justify-content: space-between;
-  flex-wrap: wrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
   gap: 0.5rem;
   padding: 20px 15px;
 }
 .elem {
   height: 260px;
   min-width: 240px;
-  border: 2px solid white;
+  border: 2px solid var(--pri);
   border-radius: 0.6rem;
   overflow: hidden;
   position: relative;
+  -webkit-transition: all ease-in 0.2s;
+  -o-transition: all ease-in 0.2s;
   transition: all ease-in 0.2s;
 }
 .elem img {
   height: 100%;
   width: 100%;
+  -o-object-fit: cover;
   object-fit: cover;
+  -o-object-position: center;
   object-position: center;
-  opacity: 0.6;
   cursor: pointer;
+  -webkit-transition: all ease-in 0.2s;
+  -o-transition: all ease-in 0.2s;
   transition: all ease-in 0.2s;
 }
-.elem img:hover {
-  opacity: 1;
+.elem:hover {
+  scale: 1.03;
 }
 .elem:active {
   scale: 0.97;
@@ -102,17 +130,28 @@ header {
   margin: 10px 10px 10px 10px;
   border-radius: 15px;
   padding: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
   justify-content: space-between;
   padding: 30px;
-  background-image: url("https://images.unsplash.com/photo-1736102790530-7c08d19911d4?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  background-image: url("./assets/landingPageImage.webp");
   background-size: cover;
   background-position: center;
 }
 
 .header-1 {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
 }
 
@@ -150,6 +189,10 @@ header {
   background-color: var(--bg-color3);
   padding: 20px;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
 .backBtn {
   padding: 10px 20px;
   cursor: pointer;
@@ -158,8 +201,8 @@ header {
   position: absolute;
   right: 5%;
   top: 5%;
-  background-color: red;
-  color: white;
+  background-color: var(--Tri3);
+  color: var(--pri);
   font-size: 1rem;
   font-weight: 700;
 }
@@ -171,9 +214,12 @@ header {
 .todoTasks {
   height: 80%;
   width: 100%;
-  /* background-color: var(--bg-color4); */
   margin-top: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
   justify-content: space-between;
   border-radius: 5px;
 }
@@ -181,12 +227,17 @@ header {
 .inputTasks {
   height: 100%;
   width: 33%;
-  background-color: rgba(75, 44, 44, 0.416);
+  background-color: var(--Tri);
   border-radius: 5px;
 }
 .inputTasks form {
   height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
   gap: 15px;
   padding: 1.2rem 0.5rem;
@@ -224,6 +275,8 @@ header {
 }
 .checkbox {
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   gap: 0.8rem;
   padding-left: 3px;
@@ -239,17 +292,28 @@ header {
 .allInputTasks {
   width: 65%;
   height: 100%;
-  background-color: rgba(75, 44, 44, 0.416);
+  background-color: var(--Tri);
   border-radius: 5px;
   padding: 25px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
   gap: 0.8rem;
   overflow: auto;
 }
 .displayInputTasks {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
   justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   padding: 8px;
   background-color: #381a05;
@@ -261,7 +325,7 @@ header {
   position: relative;
 }
 .displayInputTasks span {
-  background: #e63946; /* red */
+  background: #e63946;
   color: #fff;
   font-size: 7px;
   padding: 2px 6px;
@@ -271,6 +335,8 @@ header {
   margin-left: 5px;
 }
 .allInputTasks button {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   padding: 11px;
   background-color: rgb(26, 134, 26);
@@ -302,16 +368,27 @@ header {
   height: 80%;
   width: 100%;
   color: #111;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
   align-items: flex-start;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
   justify-content: space-between;
   gap: 12px;
   overflow: auto;
 }
 
 .day-planner-time {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   position: relative;
   width: 49%;
@@ -342,7 +419,6 @@ header {
 
 /* ................ motivational page .................. */
 .motivation-fullTasks {
-  /* display: block; */
   position: relative;
 }
 .motivation-container {
@@ -351,40 +427,52 @@ header {
   position: absolute;
   top: 50%;
   left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   border-radius: 30px;
 }
-.motivation-container::after {
-  content: "";
-  height: 25rem;
-  min-width: 30rem;
-  position: absolute;
-  top: 3%;
-  left: 4%;
-  box-shadow: 0 0 20px rgb(255, 255, 255);
-  border-radius: 30px;
-  scale: 1.15;
-  z-index: 9;
+.motivation-fullTasks > h1 {
+  font-size: 40px;
+  font-weight: 700;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  letter-spacing: 2px;
 }
-.motivation-wrapper {
+.motivation-container .motivation-wrapper {
   z-index: 10;
   position: absolute;
   min-height: 420px;
-  min-width: 520px;
-  background-color: rgba(0, 254, 229, 0.808);
+  min-width: -webkit-fit-content;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+  background-color: #e6636e;
   border-radius: 30px;
-  padding: 15px;
+  padding: 5px;
 }
+
+.motivation-fullTasks .backBtn {
+  z-index: 999;
+}
+
 .motivation-wrapper .motivation-1 {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
-  background-color: #381a05;
+  background-color: var(--bg-color4);
   padding: 20px;
   border-radius: 18px;
-  margin-top: 20px;
 }
+
 .motivation-1 h2 {
   font-size: 35px;
   font-weight: 600;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
   letter-spacing: 2px;
   font-family: bold;
@@ -404,6 +492,8 @@ header {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 .motivation-3 {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
 }
 .motivation-3 h2 {
@@ -420,27 +510,25 @@ header {
   border: none;
 }
 
-.motivation-wrapper img {
-  position: absolute;
-  top: 6%;
-  right: 5%;
-  opacity: 0.7;
-}
-
 /* ................. Pomodoro Timer ................... */
 .timer-fullTasks {
   position: relative;
 }
 .timer-fullTasks > h1 {
-  font-size: 40px;
+  font-size: 45px;
   font-weight: 700;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
   letter-spacing: 2px;
 }
 .pomo-timer {
   position: absolute;
-  top: 45%;
+  top: 48%;
   left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   text-align: center;
 }
@@ -455,6 +543,7 @@ header {
   border-radius: 5px;
   margin: 10px;
   border: none;
+  -webkit-box-shadow: 3px 3px 0 black;
   box-shadow: 3px 3px 0 black;
   cursor: pointer;
 }
@@ -463,13 +552,16 @@ header {
   cursor: not-allowed;
 }
 .pomo-timer button:active {
+  -webkit-box-shadow: 0 0 0 black;
   box-shadow: 0 0 0 black;
   scale: 0.97;
 }
 .timer-fullTasks .session {
   position: absolute;
-  top: 17%;
+  top: 22%;
   left: 50%;
+  -webkit-transform: translate(-50%, 0);
+  -ms-transform: translate(-50%, 0);
   transform: translate(-50%, 0);
   background: rgb(42, 178, 42);
   color: var(--pri);
@@ -478,4 +570,301 @@ header {
   border-radius: 10px;
   font-weight: 700;
   font-size: 20px;
+}
+/* ================== RESPONSIVE DESIGN ================== */
+
+/* Tablets & small laptops */
+@media (max-width: 1024px) {
+  header {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    height: auto;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .header-1 h1 {
+    font-size: 48px;
+  }
+
+  .header-1 h4 {
+    font-size: 32px;
+  }
+
+  .header-2 h2 {
+    font-size: 36px;
+  }
+
+  .allTasks .allFeatures {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .elem {
+    width: 48%;
+    height: 240px;
+  }
+
+  .todoTasks {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .inputTasks,
+  .allInputTasks {
+    width: 100%;
+  }
+
+  .motivation-container {
+    width: 90%;
+  }
+
+  .timer-fullTasks .session {
+    font-size: 15px;
+  }
+
+  .pomo-timer {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .pomo-timer h1 {
+    font-size: 52px;
+    margin-top: 10rem;
+  }
+}
+
+@media (max-width: 768px) {
+  main {
+    height: auto;
+  }
+
+  .allTasks .allFeatures {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  .elem {
+    width: 100%;
+    height: 220px;
+  }
+
+  .todo-fullTasks h1,
+  .daily-fullTasks h1,
+  .motivation-fullTasks h1,
+  .timer-fullTasks h1 {
+    font-size: 2rem;
+  }
+
+  header {
+    width: 95%;
+    padding: 20px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .header-1 h1 {
+    font-size: 36px;
+  }
+  .header-1 h2 {
+    font-size: 22px;
+  }
+  .header-1 h4 {
+    font-size: 28px;
+  }
+
+  .header-2 h2 {
+    font-size: 32px;
+  }
+  .header-2 h4 {
+    font-size: 18px;
+  }
+
+  .day-planner-time {
+    width: 100%;
+  }
+  .motivation-fullTasks .backBtn {
+    position: absolute;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    top: 28%;
+    right: 5%;
+  }
+  .todo-fullTasks .backBtn {
+    position: absolute;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    top: 3%;
+    right: 5%;
+  }
+  .daily-fullTasks .backBtn {
+    position: absolute;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    top: 4%;
+    right: 4%;
+  }
+  .timer-fullTasks .backBtn {
+    position: absolute;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    top: 30%;
+    right: 5%;
+  }
+
+  .motivation-wrapper {
+    width: 100%;
+    margin-top: 15%;
+  }
+
+  .timer-fullTasks .session {
+    font-size: 15px;
+    margin-top: 5rem;
+  }
+
+  .pomo-timer {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 12.4rem;
+  }
+
+  .pomo-timer h1 {
+    font-size: 52px;
+    margin-top: 10rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .todo-fullTasks h1,
+  .daily-fullTasks h1,
+  .motivation-fullTasks h1,
+  .timer-fullTasks h1 {
+    font-size: 25px;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  .header-1 h1 {
+    font-size: 28px;
+  }
+  .header-2 h2 {
+    font-size: 26px;
+  }
+
+  .motivation-wrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    border: 3px solid white;
+  }
+
+  .motivation-2 h1 {
+    font-size: 20px;
+  }
+  .motivation-3 h2 {
+    font-size: 16px;
+  }
+
+  .motivation-fullTasks .backBtn {
+    position: absolute;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    top: 22%;
+    right: 5%;
+  }
+  .todo-fullTasks .backBtn {
+    position: absolute;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    top: 3%;
+    right: 5%;
+  }
+  .daily-fullTasks .backBtn {
+    position: absolute;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    top: 4%;
+    right: 4%;
+  }
+  .timer-fullTasks .backBtn {
+    position: absolute;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    top: 27%;
+    right: 5%;
+  }
+
+  .session {
+    margin-top: -8%;
+  }
+  .pomo-timer h1 {
+    font-size: 3rem;
+    margin-top: 4rem;
+  }
+  .pomo-timer {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    margin-top: 60%;
+  }
 }

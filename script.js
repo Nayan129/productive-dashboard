@@ -49,6 +49,7 @@ function landingPageData() {
     seconds = seconds < 10 ? "0" + seconds : seconds;
 
     landingPageData += `
+        
         <div class="header-1">
           <h2>${date} ${month}, ${year}</h2>
           <h1>${dayOfWeek}, ${hours}:${minutes}:${seconds} ${ampm}</h1>
@@ -104,7 +105,7 @@ function openFeatures() {
   separateTasksBackBtn.forEach((back) => {
     back.addEventListener("click", () => {
       separateTasks[back.id].style.display = "none";
-      allTasksSection.style.display = "flex";
+      allTasksSection.style.display = "block";
     });
   });
 }
