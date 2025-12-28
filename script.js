@@ -1,8 +1,18 @@
+//  Ensures DOM loads before JS runs
+document.addEventListener("DOMContentLoaded", () => {
+  landingPageData();
+  openFeatures();
+  todoList();
+  dailyPlanner();
+  motivationalQuote();
+  PomodoroTimer();
+});
+
 // ................ Landing Page Logic ...................
 function landingPageData() {
   let header = document.querySelector("header");
 
-  const API_KEY = CONFIG.WEATHER_API_KEY;
+  const API_KEY = "741db4dab27fe51c6534364e6f171b8a";
 
   function timeDate(data) {
     let landingPageData = "";
@@ -31,40 +41,38 @@ function landingPageData() {
     ];
 
     let now = new Date();
-    let date = now.getDate();
-    let dayOfWeek = totalDaysOfWeek[now.getDay()];
     let hours = now.getHours();
-    let minutes = now.getMinutes();
-    let seconds = now.getSeconds();
-    let month = months[now.getMonth()];
-    let year = now.getFullYear();
 
     // it is for 24 to 12 hours conversion and minutes into 2 digit format logic
 
     let ampm = hours >= 12 ? "PM" : "AM";
     hours = hours % 12 || 12;
 
-    hours = hours < 10 ? "0" + hours : hours;
-    minutes = minutes < 10 ? "0" + minutes : minutes;
-    seconds = seconds < 10 ? "0" + seconds : seconds;
+    const landingPageHTML = `
+      <div class="header-1">
+        <h2>${now.getDate()} ${
+      months[now.getMonth()]
+    }, ${now.getFullYear()}</h2>
+        <h1>${totalDaysOfWeek[now.getDay()]},
+            ${String(hours).padStart(2, "0")}:${String(
+      now.getMinutes()
+    ).padStart(2, "0")}:${String(now.getSeconds()).padStart(
+      2,
+      "0"
+    )} ${ampm}</h1>
+        <h4>${data.name}</h4>
 
-    landingPageData += `
-        
-        <div class="header-1">
-          <h2>${date} ${month}, ${year}</h2>
-          <h1>${dayOfWeek}, ${hours}:${minutes}:${seconds} ${ampm}</h1>
-          <h4>${data.name}</h4>
-        </div>
+      </div>
 
-        <div class="header-2">
-          <h2>${Math.round(data.main.temp)} °C
-</h2>
-          <h4>${data.weather[0].description}</h4>
-          <h4>Humidity: ${data.main.humidity}%</h4>
-          <h4>${(data.wind.speed * 3.6).toFixed(1)} km/h</h4>
-        </div>`;
+      <div class="header-2">
+        <h2>${Math.round(data.main.temp)} °C</h2>
+        <h4>${data.weather[0].description}</h4>
+        <h4>Humidity: ${data.main.humidity}%</h4>
+        <h4>${(data.wind.speed * 3.6).toFixed(1)} km/h</h4>
+      </div>
+    `;
 
-    header.innerHTML = landingPageData;
+    header.innerHTML = landingPageHTML;
   }
 
   async function fetchWeatherData() {
@@ -75,6 +83,7 @@ function landingPageData() {
       let data = await response.json();
 
       timeDate(data);
+
       setInterval(() => {
         timeDate(data);
       }, 1000);
@@ -86,7 +95,6 @@ function landingPageData() {
 
   fetchWeatherData();
 }
-landingPageData();
 
 // ............ fullTasks Openfeature Logic ..............
 function openFeatures() {
@@ -109,31 +117,26 @@ function openFeatures() {
     });
   });
 }
-openFeatures();
 // ............. todo list logic .....................
 function todoList() {
-  var currentTask = [];
-
-  if (localStorage.getItem("currentTask")) {
-    currentTask = JSON.parse(localStorage.getItem("currentTask"));
-  }
+  let currentTask = JSON.parse(localStorage.getItem("currentTask")) || [];
 
   // here we write logic of input field that redner on allTaskSection
 
   function renderTask() {
     let allInputTasks = document.querySelector(".allInputTasks");
-    var sum = "";
 
-    currentTask.forEach((elem, idx) => {
-      sum += ` 
+    allInputTasks.innerHTML = currentTask
+      .map(
+        (elem, idx) => ` 
       <div class="displayInputTasks">
         <h3>${elem.task}  ${elem.imp ? "<span>imp</span>" : ""}</h3>
         <button type="button" id=${idx}>Mark as Completed</button>
       </div>
-      `;
-    });
+      `
+      )
+      .join("");
 
-    allInputTasks.innerHTML = sum;
     localStorage.setItem("currentTask", JSON.stringify(currentTask));
 
     // this is to make markbtn working .....
@@ -148,6 +151,7 @@ function todoList() {
       });
     });
   }
+
   renderTask();
 
   let form = document.querySelector(".inputTasks form");
@@ -158,11 +162,14 @@ function todoList() {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
+    if (!taskInput.value.trim()) return;
+
     currentTask.push({
-      task: taskInput.value,
-      detail: taskDetailsInput.value,
+      task: taskInput.value.trim(),
+      detail: taskDetailsInput.value.trim(),
       imp: taskCheckbox.checked,
     });
+
     taskInput.value = "";
     taskDetailsInput.value = "";
     taskCheckbox.checked = false;
@@ -170,16 +177,13 @@ function todoList() {
     renderTask();
   });
 }
-todoList();
 
 // ............. Daily planner Logic .................
 function dailyPlanner() {
   let dayPlanner = document.querySelector(".day-planner");
 
   const today = new Date().toDateString();
-  const savedDate = localStorage.getItem("dayPlanDate");
-
-  if (savedDate !== today) {
+  if (localStorage.getItem("dayPlanDate") !== today) {
     localStorage.removeItem("dayPlanData");
     localStorage.setItem("dayPlanDate", today);
   }
@@ -209,8 +213,6 @@ function dailyPlanner() {
     });
   });
 }
-dailyPlanner();
-
 // ............. Motivation Quotes logic ..................
 
 function motivationalQuote() {
@@ -218,17 +220,18 @@ function motivationalQuote() {
   let motivation3 = document.querySelector(".motivation-3");
 
   async function fetchQoutes() {
-    let response = await fetch("https://dummyjson.com/quotes/random");
-    let data = await response.json();
-    localStorage.setItem("data", JSON.stringify(data));
-    let original = JSON.parse(localStorage.getItem("data"));
-    motivation2.innerHTML = `<h1>— ${original.quote}</h1>`;
-    motivation3.innerHTML = `<h2>— ${original.author}</h2>`;
-    motivation2.classList.add("h1");
+    try {
+      let response = await fetch("https://dummyjson.com/quotes/random");
+      let data = await response.json();
+
+      motivation2.innerHTML = `<h1>— ${data.quote}</h1>`;
+      motivation3.innerHTML = `<h2>— ${data.author}</h2>`;
+    } catch (error) {
+      motivation2.classList.add("h1");
+    }
   }
   fetchQoutes();
 }
-motivationalQuote();
 
 // ............. Pomodoro Timer Logic .....................
 
@@ -241,9 +244,8 @@ function PomodoroTimer() {
 
   let timerInterval = null;
   let totalseconds = 25 * 60;
-
-  startBtn.disabled = false;
   let isWorkSession = true;
+  startBtn.disabled = false;
 
   function updateTimer() {
     let minutes = Math.floor(totalseconds / 60);
@@ -321,4 +323,3 @@ function PomodoroTimer() {
   pauseBtn.addEventListener("click", pauseTimer);
   resetBtn.addEventListener("click", resetTimer);
 }
-PomodoroTimer();
